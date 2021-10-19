@@ -36,11 +36,13 @@ function makeHtmlBoard() {
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
+
   board.append(top);
 
-  // 
+  // makes the main part of the board
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
+
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
@@ -53,8 +55,12 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  for (let y = HEIGHT - 1; y >= 0; y--) {
+    if (!board[y][x]) {
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
